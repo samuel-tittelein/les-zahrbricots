@@ -28,3 +28,8 @@ Chaque commit sera aussi atomique que possible, et devra comporter la référenc
 - Squelette du site
 - Création de la BD en sqlite
 - Interaction avec l'API
+
+# Format de l'agenda
+
+Une milestone git par sprint, correspondant à une séance (première milestone sur deux séances car la première n'est pas complète)
+Chaque fonction du sprint backlog sera associée à une issue git
