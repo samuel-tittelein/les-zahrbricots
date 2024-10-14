@@ -1,0 +1,19 @@
+CREATE OR REPLACE TABLE IF NOT EXISTS USER(
+    id INTEGER,
+    name VARCHAR,
+    password VARCHAR
+);
+
+CREATE OR REPLACE TABLE IF NOT EXISTS PRODUCT(
+    id INTEGER,
+    categorie varchar,
+    name VARCHAR,
+    price DECIMAL
+);
+
+CREATE OR REPLACE TABLE IF NOT EXISTS THE_PRICE_IS_RIGHT(
+    id_user SERIAL FOREIGN KEY REFERENCES USER(id),
+    id_product INTEGER  FOREIGN KEY REFERENCES PRODUCT(id),
+    nb_tries INTEGER,
+    PRIMARY KEY (id_user, id_product)
+);
