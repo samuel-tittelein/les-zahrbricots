@@ -1,5 +1,8 @@
 import requests
 import random
+import sqlite3
+
+con = sqlite3.connect('amazonBDD.db')
 
 def get_infos(id_product):
     url = "http://ws.chez-wam.info/" + id_product
