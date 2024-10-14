@@ -23,11 +23,17 @@ Chaque commit sera aussi atomique que possible, et devra comporter la référenc
 - Interactions entre le programme et la BD
 - Bonus ? (FAUT FAIRE LE MODE NUIT)
 
-# Sprint backlog
+# Sprint backlog 1
 
 - Squelette du site
 - Création de la BD en sqlite
 - Interaction avec l'API
+
+# Sprint backlog 2
+
+- Page d'accueil
+- Fin de la mise en place de la BD
+- Fin de la mise en place de l'API
 
 # Format de l'agenda
 
