@@ -1,11 +1,11 @@
 CREATE OR REPLACE TABLE IF NOT EXISTS USER(
-    id INTEGER,
+    id SERIAL,
     name VARCHAR,
     password VARCHAR
 );
 
 CREATE OR REPLACE TABLE IF NOT EXISTS PRODUCT(
-    id INTEGER,
+    id SERIAL,
     categorie varchar,
     name VARCHAR,
     price DECIMAL
