@@ -1,13 +1,19 @@
 import requests
+import random
 
-url = "http://ws.chez-wam.info/"
+def get_infos(id_product):
+    url = "http://ws.chez-wam.info/" + id_product
+    try :
+        response = requests.get(url).json()
 
-#TODO retourner un id de produit random
-id_product = None
-url += id_product
+        name = response['title'].split(',')[0]
+        price = response['price']
+        img = response['images'][0]
+    except ValueError :
+        print('id de produit non valide : ' + id_product)
 
-response = requests.get(url)
+    return (name, price, img)
 
-img = response['images'][0]
-price = response['price']
-name = response['title'].split(',')[0]
+##Debug
+#id_product = "B07YQFZ6CJ"
+#print(get_infos(id_product))
