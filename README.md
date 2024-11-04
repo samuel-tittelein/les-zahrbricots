@@ -35,6 +35,13 @@ Chaque commit sera aussi atomique que possible, et devra comporter la référenc
 - Fin de la mise en place de la BD
 - Fin de la mise en place de l'API
 
+# Sprint backlog 3
+
+- Implémentation d'une première version jouable
+- Adaptation de la BDD
+- Remplissage de la BDD
+- Lien entre l'appli et la BDD
+
 # Format de l'agenda
 
 Une milestone git par sprint, correspondant à une séance (première milestone sur deux séances car la première n'est pas complète)
