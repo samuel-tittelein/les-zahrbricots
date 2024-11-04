@@ -4,9 +4,10 @@ import csv
 def read_csv(file_path):
     with open(file_path, 'r') as file:
         reader = csv.reader(file)
+        rows = []
+        next(reader)
         for row in reader:
-            next(reader)  # Skip le header de chaque colonne
-            rows = []
-            for row in reader:
-                rows.append(row)
-            return rows
+            next(reader)
+            values = row.split(',')
+            rows.append(values)
+        return rows
