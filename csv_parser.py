@@ -8,6 +8,6 @@ def read_csv(file_path):
         next(reader)
         for row in reader:
             next(reader)
-            values = row.split(',')
-            rows.append(values)
+            print(row)
+            rows.append(row)
         return rows
