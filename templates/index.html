@@ -17,7 +17,7 @@
         <form class="has-text-centered" method="post" action="/guess">
           <div class="columns is-centered">
             <div class="column is-narrow">
-              <h1 class="title">Nom du produit</h1>
+              <h1 class="title">{{ name if name else "No name" }}</h1>
               <img
                 src="https://picsum.photos/300/300"
                 alt="Product image"
@@ -47,7 +47,7 @@
                 </h1>
               </div>
               <p class="title is-4">
-                Prix actuel : <span id="price">15</span> €
+                Prix actuel : <span id="price">{{ price }} €</span>
               </p>
             </div>
           </div>
