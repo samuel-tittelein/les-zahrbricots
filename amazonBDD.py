@@ -20,7 +20,7 @@ def createUser(name):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("INSERT INTO user (name) VALUES ('?')", name)
+        cur.execute("INSERT INTO user (name) VALUES (?)", name)
         con.commit()
     except sqlite3.Error as e:
         print(e)
@@ -33,7 +33,7 @@ def createProduct(name, price, category):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("INSERT INTO product (name, price, category) VALUES ('?', '?', '?')", [name, price, category])
+        cur.execute("INSERT INTO product (name, price, category) VALUES (?, ?, ?)", [name, price, category])
         con.commit()
     except sqlite3.Error as e:
         print(e)
@@ -47,7 +47,7 @@ def createThePriceIsRight(id_user, id_product, nb_tries):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("INSERT INTO THE_PRICE_IS_RIGHT (id_user, id_product, nb_tries) VALUES ('?', '?')", [id_user, id_product, nb_tries])
+        cur.execute("INSERT INTO THE_PRICE_IS_RIGHT (id_user, id_product, nb_tries) VALUES (?, ?)", [id_user, id_product, nb_tries])
         con.commit()
     except sqlite3.Error as e:
         print(e)
