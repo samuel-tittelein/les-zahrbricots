@@ -1,12 +1,10 @@
 CREATE TABLE IF NOT EXISTS USER(
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     name VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS PRODUCT(
-    id SERIAL,
-    name VARCHAR,
-    price DECIMAL,
+    id VARCHAR PRIMARY KEY,
     category varchar
 );
 

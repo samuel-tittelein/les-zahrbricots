@@ -33,7 +33,7 @@ def createProduct(name, price, category):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("INSERT INTO product (name, price, category) VALUES (?, ?, ?)", [name, price, category])
+        cur.execute("INSERT INTO product (id, category) VALUES (?, ?)", [id, category])
         con.commit()
     except sqlite3.Error as e:
         print(e)
