@@ -20,15 +20,16 @@ price = 15 #prix du produit /!\ a recuperer de la base de donnees
 def guess():
     guess_price = request.form['guess']
     if guess_price == '':
-        return render_template('index.html', response='Please enter a price')
+        return render_template('index.html', response='Merci d\'entrer un prix')
     else:
         guess_price = float(guess_price)
         print(guess_price)
         if guess_price < price:
-            return render_template('index.html', response="You guessed " + str(guess_price) + " which is too low")
+            return render_template('index.html', response="Vous avez entrez " + str(guess_price) + "$ ce qui est trop bas")
         elif guess_price > price:
-            return render_template('index.html', response="You guessed " + str(guess_price) + " which is too high")
+            return render_template('index.html', response="Vous avez entrez " + str(guess_price) + "$ ce qui est trop haut")
         else:
+            #Le prix est bon faut changer l'item
             return render_template('index.html', response="You guessed the correct price")
 
 
