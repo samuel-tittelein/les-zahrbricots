@@ -47,7 +47,7 @@ def createThePriceIsRight(id_user, id_product, nb_tries):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("INSERT INTO product (id_user, id_product, nb_tries) VALUES ('?', '?')", [id_user, id_product, nb_tries])
+        cur.execute("INSERT INTO THE_PRICE_IS_RIGHT (id_user, id_product, nb_tries) VALUES ('?', '?')", [id_user, id_product, nb_tries])
         con.commit()
     except sqlite3.Error as e:
         print(e)
@@ -85,4 +85,20 @@ def getCategories():
     finally:
         cur.close()
         con.close()
+
+#récupérer le podium
+def getPodium(category):
+    con = sqlite3.connect('dataBase.db')
+    cur = con.cursor()
+    try:
+        cur.execute("SELECT USER.name, nb_tries FROM THE_PRICE_IS_RIGHT INNER JOIN USER ON THE_PRICE_IS_RIGHT.id_user = USER.id INNER JOIN PRODUCT ON PRODUCT.id = THE_PRICE_IS_RIGHT.id_product WHERE ? = PRODUCT.category LIMIT 5", category)
+        podium = cur.fetchall()
+        return podium
+    except sqlite3.Error as e:
+        print(e)
+        return None
+    finally:
+        cur.close()
+        con.close()
+
 
