@@ -16,11 +16,11 @@ def createTables():
         cur.close()
         con.close()
 
-def createUser(name, password):
+def createUser(name):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("INSERT INTO user (name, password) VALUES ('?', '?')", [name, password])
+        cur.execute("INSERT INTO user (name) VALUES ('?')", name)
         con.commit()
     except sqlite3.Error as e:
         print(e)
@@ -29,11 +29,11 @@ def createUser(name, password):
         cur.close()
         con.close()
 
-def createProduct(name, price):
+def createProduct(name, price, category):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("INSERT INTO product (name, price) VALUES ('?', '?')", [name, price])
+        cur.execute("INSERT INTO product (name, price, category) VALUES ('?', '?', '?')", [name, price, category])
         con.commit()
     except sqlite3.Error as e:
         print(e)
@@ -57,11 +57,11 @@ def createThePriceIsRight(id_user, id_product, nb_tries):
         con.close()
 
 #renvoie tous les produits en fonction d'un tableau de categorie'
-def getProductsCategory(categories):
+def getProductsCategory(category):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("SELECT * FROM ARTICLE WHERE id_category in ?", categories)
+        cur.execute("SELECT * FROM ARTICLE WHERE category = ?", category)
         products = cur.fetchall()
         return products
     except sqlite3.Error as e:
