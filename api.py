@@ -18,10 +18,11 @@ def get_infos(id_product):
         name = response['title'].split(',')[0]
         price = response['price']
         img = response['images'][0]
+        return name, price, img
     except ValueError :
         print('id de produit non valide : ' + id_product)
 
-    return (name, price, img)
+
 
 ##Debug
 #id_product = "B07YQFZ6CJ"
