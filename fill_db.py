@@ -1,7 +1,7 @@
 from unicodedata import category
 
 from amazonBDD import *
-from api import id_product, get_infos
+from api import get_infos
 from csv_parser import read_csv
 
 def fill_product(file_path):
