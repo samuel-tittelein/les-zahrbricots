@@ -14,7 +14,7 @@
       <div class="container">
         <h1 class="title">Juste Prix Amazon</h1>
         <p class="subtitle">Devinez le prix d'un produit Amazon</p>
-        <form class="has-text-centered">
+        <form class="has-text-centered" method="post" action="/guess">
           <div class="columns is-centered">
             <div class="column is-narrow">
               <h1 class="title">Nom du produit</h1>
@@ -28,6 +28,7 @@
                 <input
                   type="number"
                   class="input"
+                  name="guess"
                   min="0"
                   style="width: 100px"
                 />
@@ -42,7 +43,7 @@
                   class="subtitle is-5 has-text-success"
                   style="margin-bottom: 20px"
                 >
-                  Réponse du serveur
+                  {{ response }}
                 </h1>
               </div>
               <p class="title is-4">
