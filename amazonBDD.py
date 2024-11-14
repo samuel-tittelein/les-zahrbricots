@@ -29,7 +29,7 @@ def createUser(name):
         cur.close()
         con.close()
 
-def createProduct(name, price, category):
+def createProduct(id, category):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
@@ -61,7 +61,7 @@ def getProductsCategory(category):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("SELECT * FROM ARTICLE WHERE category = ?", category)
+        cur.execute("SELECT * FROM PRODUCT WHERE category = ?", (category,))
         products = cur.fetchall()
         return products
     except sqlite3.Error as e:
@@ -76,7 +76,7 @@ def getCategories():
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("SELECT DISTINCT(category) FROM ARTICLE")
+        cur.execute("SELECT DISTINCT(category) FROM PRODUCT")
         categories = cur.fetchall()
         return categories
     except sqlite3.Error as e:
@@ -91,7 +91,7 @@ def getPodium(category):
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:
-        cur.execute("SELECT USER.name, nb_tries FROM THE_PRICE_IS_RIGHT INNER JOIN USER ON THE_PRICE_IS_RIGHT.id_user = USER.id INNER JOIN PRODUCT ON PRODUCT.id = THE_PRICE_IS_RIGHT.id_product WHERE ? = PRODUCT.category LIMIT 5", category)
+        cur.execute("SELECT USER.name, nb_tries FROM THE_PRICE_IS_RIGHT INNER JOIN USER ON THE_PRICE_IS_RIGHT.id_user = USER.id INNER JOIN PRODUCT ON PRODUCT.id = THE_PRICE_IS_RIGHT.id_product WHERE ? = PRODUCT.category LIMIT 5", (category,))
         podium = cur.fetchall()
         return podium
     except sqlite3.Error as e:
