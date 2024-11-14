@@ -14,24 +14,31 @@ def game():
 
 product_price = 15  # default price, to be updated from the API
 product_name = "test"  # default name, to be updated from the API
+product_image = "test"  # default image, to be updated from the API
 
 def set_item():
-    global product_name, product_price
+    global product_name, product_price, product_image
     category = request.form.get('categorie')
     #id = api.get_random_id_product(category)
-    id = "B076125HMB"
-    product_name, product_price, img = api.get_infos(id)
+    id = "B00699R6UI"
+    try:
+        product_name, product_price, product_image = api.get_infos(id)
+    except:
+        product_name, product_price, product_image = "Erreur", "Erreur", "Erreur"
     print(product_name, product_price)
 
 @app.route('/guess', methods=['POST'])
 def guess():
-    global product_name, product_price
+    global product_name, product_price, product_image
     guess_price = request.form.get('guess', '').strip()
 
     if not guess_price:
-        return render_template('index.html', response='Merci d\'entrer un prix', name=product_name, price=product_price)
+        return render_template('index.html', response='Merci d\'entrer un prix', name=product_name, price=product_price, image=product_image)
     
     guess_price = float(guess_price)
+    product_price = product_price.replace("€", "")
+    product_price = product_price.replace(",", ".")
+    product_price = float(product_price)
 
     if guess_price < product_price:
         response = f"Vous avez entrez {guess_price}€, ce qui est trop bas"
@@ -41,7 +48,7 @@ def guess():
         response = "You guessed the correct price"
         set_item()  # Reset item on correct guess
 
-    return render_template('index.html', response=response, name=product_name, price=product_price)
+    return render_template('index.html', response=response, name=product_name, price=product_price, image=product_image)
 
 if __name__ == '__main__':
     app.run(debug=True)

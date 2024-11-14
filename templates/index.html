@@ -18,15 +18,11 @@
           <div class="columns is-centered">
             <div class="column is-narrow">
               <h1 class="title">{{ name if name else "No name" }}</h1>
-              <img
-                src="https://picsum.photos/300/300"
-                alt="Product image"
-                style="height: 50vh"
-              />
+              <img src="{{ image}}" alt="Product image" style="height: 50vh" />
               <br />
               <div style="margin-top: 20px">
                 <input
-                  type="number"
+                  type="text"
                   class="input"
                   name="guess"
                   min="0"
