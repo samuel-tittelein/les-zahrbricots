@@ -1,12 +1,18 @@
+from unicodedata import category
+
 from flask import Flask, render_template, request
 import api
+from amazonBDD import getCategories
 from fill_db import fill_product
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('accueil.html', categories=["Informatique", "Musique", "Vetements"])
+    categories = getCategories()
+    for i in range(len(categories)):
+        categories[i] = categories[i][0]
+    return render_template('accueil.html', categories = categories)
 
 @app.route('/game', methods=['POST'])
 def game():
@@ -26,7 +32,7 @@ def set_item():
         product_price = product_price.replace("€", "")
         product_price = product_price.replace(",", ".")
     except:
-        product_name, product_price, product_image = "Erreur", "Erreur", "Erreur"
+        set_item()
     print(product_name, product_price)
 
 @app.route('/guess', methods=['POST'])

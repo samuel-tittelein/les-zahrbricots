@@ -8,7 +8,7 @@ def get_random_id_product(categorie):
     con = sqlite3.connect('amazonBDD.db')
     products = getProductsCategory(categorie)
     con.close()
-    return random.choice(products)
+    return random.choice(products[0])
 
 def get_infos(id_product):
     url = "http://ws.chez-wam.info/" + id_product
