@@ -29,7 +29,8 @@ def createUser(name):
         cur.close()
         con.close()
 
-def createProduct(name, price, category):
+def createProduct(id, category):
+    print("BDD Product : ", id, category)
     con = sqlite3.connect('dataBase.db')
     cur = con.cursor()
     try:

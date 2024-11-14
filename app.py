@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import api
+from fill_db import fill_product
 
 app = Flask(__name__)
 
@@ -19,8 +20,7 @@ product_image = "test"  # default image, to be updated from the API
 def set_item():
     global product_name, product_price, product_image
     category = request.form.get('categorie')
-    #id = api.get_random_id_product(category)
-    id = "B00699R6UI"
+    id = api.get_random_id_product(category)
     try:
         product_name, product_price, product_image = api.get_infos(id)
         product_price = product_price.replace("€", "")
@@ -52,4 +52,5 @@ def guess():
     return render_template('index.html', response=response, name=product_name, price=product_price, image=product_image)
 
 if __name__ == '__main__':
+    fill_product('Categories.csv')
     app.run(debug=True)
