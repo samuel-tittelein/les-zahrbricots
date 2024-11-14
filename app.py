@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('acceuil.html', categories=["Informatique", "Musique", "Vetements"])
+    return render_template('accueil.html', categories=["Informatique", "Musique", "Vetements"])
 
 @app.route('/game', methods=['POST'])
 def game():
@@ -23,6 +23,8 @@ def set_item():
     id = "B00699R6UI"
     try:
         product_name, product_price, product_image = api.get_infos(id)
+        product_price = product_price.replace("€", "")
+        product_price = product_price.replace(",", ".")
     except:
         product_name, product_price, product_image = "Erreur", "Erreur", "Erreur"
     print(product_name, product_price)
@@ -36,8 +38,7 @@ def guess():
         return render_template('index.html', response='Merci d\'entrer un prix', name=product_name, price=product_price, image=product_image)
     
     guess_price = float(guess_price)
-    product_price = product_price.replace("€", "")
-    product_price = product_price.replace(",", ".")
+
     product_price = float(product_price)
 
     if guess_price < product_price:
