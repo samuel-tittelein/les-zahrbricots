@@ -14,20 +14,17 @@
       <div class="container">
         <h1 class="title">Juste Prix Amazon</h1>
         <p class="subtitle">Devinez le prix d'un produit Amazon</p>
-        <form class="has-text-centered">
+        <form class="has-text-centered" method="post" action="/guess">
           <div class="columns is-centered">
             <div class="column is-narrow">
-              <h1 class="title">Nom du produit</h1>
-              <img
-                src="https://picsum.photos/300/300"
-                alt="Product image"
-                style="height: 50vh"
-              />
+              <h1 class="title">{{ name if name else "No name" }}</h1>
+              <img src="{{ image}}" alt="Product image" style="height: 50vh" />
               <br />
               <div style="margin-top: 20px">
                 <input
-                  type="number"
+                  type="text"
                   class="input"
+                  name="guess"
                   min="0"
                   style="width: 100px"
                 />
@@ -42,11 +39,11 @@
                   class="subtitle is-5 has-text-success"
                   style="margin-bottom: 20px"
                 >
-                  Réponse du serveur
+                  {{ response }}
                 </h1>
               </div>
               <p class="title is-4">
-                Prix actuel : <span id="price">15</span> €
+                Prix actuel : <span id="price">{{ price }} €</span>
               </p>
             </div>
           </div>

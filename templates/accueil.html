@@ -35,7 +35,7 @@
     </style>
   </head>
   <body>
-    <form action="">
+    <form action="/game" method="post">
       <section class="section">
         <div class="container">
           <h1 class="title">Nom d'utilisateur :</h1>
@@ -47,12 +47,19 @@
           <div class="columns is-centered">
             <div class="column is-narrow">
               <ul>
+                {% for categorie in categories %}
                 <li>
                   <label class="title">
-                    <input type="checkbox" class="checkbox" name="Categorie1" />
-                    Catégorie 1
+                    <input
+                      type="radio"
+                      class="radio"
+                      name="categorie"
+                      value="{{ categorie }}"
+                    />
+                    {{ categorie }}
                   </label>
                 </li>
+                {% endfor %}
               </ul>
               <input type="submit" value="Commencer" class="input" />
             </div>
