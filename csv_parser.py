@@ -7,7 +7,6 @@ def read_csv(file_path):
         rows = []
         next(reader)
         for row in reader:
-            next(reader)
-            print(row)
+            print(row) 
             rows.append(row)
         return rows
