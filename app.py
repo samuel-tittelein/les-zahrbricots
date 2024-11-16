@@ -1,5 +1,3 @@
-from unicodedata import category
-
 from flask import Flask, render_template, request
 import api
 from amazonBDD import getCategories
@@ -16,6 +14,8 @@ def home():
 
 @app.route('/game', methods=['POST'])
 def game():
+    global category
+    category = request.form.get('categorie')
     set_item()  # Set initial product data before rendering
     return render_template('index.html', name=product_name, price=product_price)
 
@@ -24,8 +24,7 @@ product_name = "test"  # default name, to be updated from the API
 product_image = "test"  # default image, to be updated from the API
 
 def set_item():
-    global product_name, product_price, product_image
-    category = request.form.get('categorie')
+    global product_name, product_price, product_image, category
     id = api.get_random_id_product(category)
     try:
         product_name, product_price, product_image = api.get_infos(id)
