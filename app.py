@@ -17,7 +17,7 @@ def game():
     global category
     category = request.form.get('categorie')
     set_item()  # Set initial product data before rendering
-    return render_template('index.html', name=product_name, price=product_price)
+    return render_template('index.html', name=product_name, price=product_price, image=product_image)
 
 product_price = 15  # default price, to be updated from the API
 product_name = "test"  # default name, to be updated from the API
