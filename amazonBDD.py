@@ -122,10 +122,31 @@ def getPodium(category):
     try:
         print('pod : ', "(\'" + category + "\',)")
         print('cat : ', getCategories())
-        cur.execute("SELECT USER.name, nb_tries FROM THE_PRICE_IS_RIGHT INNER JOIN USER ON THE_PRICE_IS_RIGHT.id_user = USER.id INNER JOIN PRODUCT ON PRODUCT.id = THE_PRICE_IS_RIGHT.id_product WHERE PRODUCT.category =? LIMIT 5", (category,))
+        cur.execute("""
+                    SELECT USER.name, nb_tries 
+                    FROM THE_PRICE_IS_RIGHT 
+                    INNER JOIN USER ON THE_PRICE_IS_RIGHT.id_user = USER.id 
+                    INNER JOIN PRODUCT ON PRODUCT.id = THE_PRICE_IS_RIGHT.id_product 
+                    WHERE PRODUCT.category =? 
+                    LIMIT 5
+                    """, (category,))
         podium = cur.fetchall()
         print('pod : ', podium)
         return podium
+    except sqlite3.Error as e:
+        print(e)
+        return None
+    finally:
+        cur.close()
+        con.close()
+
+def getUserId(name):
+    con = sqlite3.connect('dataBase.db')
+    cur = con.cursor()
+    try:
+        cur.execute("SELECT id FROM USER WHERE name =?", (name,))
+        id = cur.fetchone()
+        return id[0]
     except sqlite3.Error as e:
         print(e)
         return None

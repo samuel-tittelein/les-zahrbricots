@@ -2,7 +2,7 @@ from unicodedata import category
 
 from flask import Flask, render_template, request, redirect, url_for
 import api
-from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser
+from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser, getUserId
 from fill_db import fill_product
 
 app = Flask(__name__)
@@ -45,7 +45,6 @@ def set_item():
 def guess():
     global id_product, product_name, product_price, product_image, username, nb_tries
     guess_price = request.form.get('guess', '').strip()
-    nb_tries = 0
 
     if not guess_price:
         return render_template('index.html', response='Merci d\'entrer un prix', name=product_name, price=product_price, image=product_image)
@@ -60,15 +59,17 @@ def guess():
     elif guess_price > product_price:
         response = f"Vous avez entrez {guess_price}€, ce qui est trop haut"
     else:
-        createThePriceIsRight(username, id_product, nb_tries)
+        userId = getUserId(username)
+        createThePriceIsRight(userId, id_product, nb_tries)
         return redirect(url_for('podium', nb_tries=nb_tries))
     return render_template('index.html', response=response, name=product_name, price=product_price, image=product_image)
 
 @app.route('/podium', methods=['GET'])
 def podium():
     global username, id_product
-    nb_tries = request.args.get('nb_tries')  # Récupère le paramètre 'category'
+    nb_tries = request.args.get('nb_tries')  # Récupère le paramètre 'category' TODO: à changer
     category = get_category(id_product)
+    print('category : ', category)
     podium = getPodium(category)
     print('podium : ', podium)
     return render_template('podium.html', podium=podium, category=category, nb_tries=nb_tries)
