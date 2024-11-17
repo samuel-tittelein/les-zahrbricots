@@ -28,6 +28,9 @@ def set_item():
     id = api.get_random_id_product(category)
     try:
         product_name, product_price, product_image = api.get_infos(id)
+        if product_price.strip() == "":
+            print("Price is empty, retrying")
+            set_item()
         product_price = product_price.replace("€", "")
         product_price = product_price.replace(",", ".")
     except:
@@ -42,17 +45,20 @@ def guess():
     if not guess_price:
         return render_template('index.html', response='Merci d\'entrer un prix', name=product_name, price=product_price, image=product_image)
     
-    guess_price = float(guess_price)
+    try:
+        guess_price = float(guess_price)
 
-    product_price = float(product_price)
+        product_price = float(product_price)
 
-    if guess_price < product_price:
-        response = f"Vous avez entrez {guess_price}€, ce qui est trop bas"
-    elif guess_price > product_price:
-        response = f"Vous avez entrez {guess_price}€, ce qui est trop haut"
-    else:
-        response = "You guessed the correct price"
-        set_item()  # Reset item on correct guess
+        if guess_price < product_price:
+            response = f"Vous avez entrez {guess_price}€, ce qui est trop bas"
+        elif guess_price > product_price:
+            response = f"Vous avez entrez {guess_price}€, ce qui est trop haut"
+        else:
+            response = "You guessed the correct price"
+            set_item()  # Reset item on correct guess
+    except ValueError:
+        response = "Merci d'entrer un prix valide"
 
     return render_template('index.html', response=response, name=product_name, price=product_price, image=product_image)
 
