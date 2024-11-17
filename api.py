@@ -5,9 +5,7 @@ import sqlite3
 from amazonBDD import getProductsCategory
 
 def get_random_id_product(categorie):
-    con = sqlite3.connect('amazonBDD.db')
     products = getProductsCategory(categorie)
-    con.close()
     return random.choice(products)[0]
 
 def get_infos(id_product):
