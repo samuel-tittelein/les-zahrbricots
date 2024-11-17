@@ -7,9 +7,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes.css') }}"
+    />
     <title>Juste Prix Amazon</title>
   </head>
   <body>
+    <div class="has-text-right">
+      <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
+    </div>
     <section class="section">
       <div class="container">
         <h1 class="title">Juste Prix Amazon</h1>
@@ -53,5 +60,10 @@
         </form>
       </div>
     </section>
+
+    <script
+      src="{{ url_for('static', filename='js/theme-switcher.js') }}"
+      defer
+    ></script>
   </body>
 </html>
