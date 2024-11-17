@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    />
+    <title>Juste Prix Amazon</title>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Juste Prix Amazon</h1>
+        <p class="subtitle">Podium pour la categorie : {{category if category else "Vetement"}}</p>
+        <p class="subtitle">Vous avez trouvé avec : {{nb_tries if nb_tries else 0}} essaie(s)</p>
+
+          <table>
+              <thead>
+                <tr>
+                  <th> Joueur </th>
+                  <th> Nombre d'essaies </th>
+                  <th> Prix </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for player in podium %}
+                <tr>
+                  <td>{{ player[0] }}</td>
+                  <td>{{ player[1] }}</td>
+                  <td>{{ player[2] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+
+          </table>
+        <form method="post" action="/game">
+          <input type="submit" value="Prochain produit" class="input" />
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
