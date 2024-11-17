@@ -2,9 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import api
 from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser, get_user_id
 from fill_db import fill_product
+import secrets
 
 app = Flask(__name__)
-app.secret_key = 'Mon loup'  # This key should be secret and random
+app.secret_key = secrets.token_hex(24)  # This key is stored inside the .env file as FLASK_SECRET_KEY
 
 @app.route('/')
 def home():
