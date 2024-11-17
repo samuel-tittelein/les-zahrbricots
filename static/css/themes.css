@@ -1,0 +1,44 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  height: 100vh;
+}
+
+.title,
+.subtitle,
+input,
+button {
+  color: #ffffff;
+}
+
+.input {
+  background-color: #1e1e1e;
+  border-color: #333333;
+  color: #ffffff;
+}
+img {
+  filter: brightness(0.9);
+}
+
+body.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+body.light-mode .title,
+body.light-mode .subtitle,
+body.light-mode input {
+  color: #000000;
+}
+body.light-mode .button {
+  border: 1px solid #ccc;
+  background-color: lightgray;
+  color: #000000;
+}
+body.light-mode .input {
+  background-color: #ffffff;
+  border-color: #ccc;
+  color: #000000;
+}
+body.light-mode img {
+  filter: brightness(1);
+}

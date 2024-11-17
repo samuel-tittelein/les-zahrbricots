@@ -8,6 +8,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes.css') }}"
+    />
     <style>
       body {
         background-color: #121212;
@@ -36,29 +40,6 @@
       input[type="submit"] {
         width: 100%;
         margin-top: 20px;
-      }
-
-      body.light-mode {
-        background-color: #ffffff;
-        color: #000000;
-      }
-      body.light-mode .title,
-      body.light-mode .subtitle,
-      body.light-mode input {
-        color: #000000;
-      }
-      body.light-mode .button {
-        border: 1px solid #ccc;
-        background-color: lightgray;
-        color: #000000;
-      }
-      body.light-mode .input {
-        background-color: #ffffff;
-        border-color: #ccc;
-        color: #000000;
-      }
-      body.light-mode img {
-        filter: brightness(1);
       }
     </style>
   </head>
@@ -102,30 +83,9 @@
       </section>
     </form>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const toggleButton = document.getElementById("mode-toggle");
-        const body = document.body;
-
-        // Default to dark mode; check for saved preference
-        if (localStorage.getItem("theme") === "light") {
-          body.classList.add("light-mode");
-          toggleButton.textContent = "🌙 Mode Sombre";
-        }
-
-        toggleButton.addEventListener("click", () => {
-          body.classList.toggle("light-mode");
-
-          // Update button text and save preference to localStorage
-          if (body.classList.contains("light-mode")) {
-            toggleButton.textContent = "🌙 Mode Sombre";
-            localStorage.setItem("theme", "light");
-          } else {
-            toggleButton.textContent = "☀️ Mode Clair";
-            localStorage.setItem("theme", "dark");
-          }
-        });
-      });
-    </script>
+    <script
+      src="{{ url_for('static', filename='js/theme-switcher.js') }}"
+      defer
+    ></script>
   </body>
 </html>
