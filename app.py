@@ -18,6 +18,8 @@ def home():
 def game():
     username = request.form.get('username')
     category = request.form.get('categorie')
+    if not category:
+        category = session.get('category')
     
     # Store user and game data in the session
     # The session is stored inside the browser's cookies
