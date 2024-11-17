@@ -80,7 +80,7 @@ def podium():
     category = get_category(id_product)
     podium = getPodium(category)
     print('podium : ', podium)
-    return render_template('podium.html', podium=podium, category=category, nb_tries=nb_tries)
+    return render_template('podium.html', podium=podium, category=category, nb_tries=nb_tries, username = username)
 
 
 if __name__ == '__main__':
