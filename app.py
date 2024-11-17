@@ -28,7 +28,7 @@ def game():
     username = request.form.get('username')
     createUser(username)
     set_item()  # Set initial product data before rendering
-    return render_template('index.html', name=product_name, price=product_price)
+    return render_template('index.html', name=product_name, price=product_price, image=product_image)
 
 def set_item():
     global id_product, product_name, product_price, product_image, category
