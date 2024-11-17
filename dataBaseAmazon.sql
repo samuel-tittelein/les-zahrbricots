@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS THE_PRICE_IS_RIGHT(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     id_user INTEGER,
     id_product INTEGER,
+    price decimal(10,2) NOT NULL,
     nb_tries INTEGER,
     FOREIGN KEY (id_product) REFERENCES PRODUCT(id),
     FOREIGN KEY (id_user) REFERENCES USER(id)
