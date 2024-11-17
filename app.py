@@ -2,7 +2,7 @@ from unicodedata import category
 
 from flask import Flask, render_template, request, redirect, url_for
 import api
-from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser
+from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser, get_user_id
 from fill_db import fill_product
 
 app = Flask(__name__)
@@ -49,7 +49,6 @@ def set_item():
 def guess():
     global id_product, product_name, product_price, product_image, username, nb_tries
     guess_price = request.form.get('guess', '').strip()
-    nb_tries = 0
 
     if not guess_price:
         return render_template('index.html', response='Merci d\'entrer un prix', name=product_name, price=product_price, image=product_image)
@@ -57,16 +56,20 @@ def guess():
     try:
         guess_price = float(guess_price)
 
-    product_price = float(product_price)
-    nb_tries += 1
+        product_price = float(product_price)
+        nb_tries += 1
 
-    if guess_price < product_price:
-        response = f"Vous avez entrez {guess_price}€, ce qui est trop bas"
-    elif guess_price > product_price:
-        response = f"Vous avez entrez {guess_price}€, ce qui est trop haut"
-    else:
-        createThePriceIsRight(username, id_product, product_price, nb_tries)
-        return redirect(url_for('podium', nb_tries=nb_tries))
+        if guess_price < product_price:
+            response = f"Vous avez entrez {guess_price}€, ce qui est trop bas"
+        elif guess_price > product_price:
+            response = f"Vous avez entrez {guess_price}€, ce qui est trop haut"
+        else:
+            userId = get_user_id(username)
+            createThePriceIsRight(userId, id_product, product_price, nb_tries)
+            return redirect(url_for('podium', nb_tries=nb_tries))
+
+    except ValueError:
+        response = "Merci d'entrer un prix valide"
 
     return render_template('index.html', response=response, name=product_name, price=product_price, image=product_image)
 
