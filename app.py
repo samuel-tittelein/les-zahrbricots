@@ -61,6 +61,7 @@ def guess():
     try:
         guess_price = float(guess_price)
         nb_tries += 1
+        session['nb_tries'] = nb_tries
 
         if guess_price < product_data['price']:
             response = f"Vous avez entrez {guess_price}€, ce qui est trop bas"
