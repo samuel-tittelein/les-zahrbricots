@@ -36,6 +36,9 @@ def set_item():
     id_product = api.get_random_id_product(category)
     try:
         product_name, product_price, product_image = api.get_infos(id_product)
+        if product_price.strip() == "":
+            print("Price is empty, retrying")
+            set_item()
         product_price = product_price.replace("€", "")
         product_price = product_price.replace(",", ".")
     except:
@@ -51,7 +54,8 @@ def guess():
     if not guess_price:
         return render_template('index.html', response='Merci d\'entrer un prix', name=product_name, price=product_price, image=product_image)
     
-    guess_price = float(guess_price)
+    try:
+        guess_price = float(guess_price)
 
     product_price = float(product_price)
     nb_tries += 1
@@ -63,6 +67,7 @@ def guess():
     else:
         createThePriceIsRight(username, id_product, product_price, nb_tries)
         return redirect(url_for('podium', nb_tries=nb_tries))
+
     return render_template('index.html', response=response, name=product_name, price=product_price, image=product_image)
 
 @app.route('/podium', methods=['GET'])
