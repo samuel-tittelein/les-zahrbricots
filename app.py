@@ -15,6 +15,7 @@ def home():
     return render_template('accueil.html', categories = categories)
 
 id_product = "" # default id
+category = "" # default category
 product_price = 15  # default price, to be updated from the API
 product_name = "test"  # default name, to be updated from the API
 product_image = "test"  # default image, to be updated from the API
@@ -30,8 +31,8 @@ def game():
     return render_template('index.html', name=product_name, price=product_price)
 
 def set_item():
-    global id_product, product_name, product_price, product_image
-    category = request.form.get('categorie')
+    global id_product, product_name, product_price, product_image, category
+    category = request.form.get('categorie') if category == "" else category
     id_product = api.get_random_id_product(category)
     try:
         product_name, product_price, product_image = api.get_infos(id_product)
@@ -60,7 +61,7 @@ def guess():
     elif guess_price > product_price:
         response = f"Vous avez entrez {guess_price}€, ce qui est trop haut"
     else:
-        createThePriceIsRight(username, id_product, nb_tries)
+        createThePriceIsRight(username, id_product, product_price, nb_tries)
         return redirect(url_for('podium', nb_tries=nb_tries))
     return render_template('index.html', response=response, name=product_name, price=product_price, image=product_image)
 
