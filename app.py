@@ -54,9 +54,9 @@ def api_set_item():
         return jsonify({'error': 'Category is required'}), 400
 
     product_data = set_item(category)
-    session['product'] = product_data  # Optionnel : stocker les données dans la session
+    session['product'] = product_data
 
-    return jsonify(product_data)  # Retourner les données sous forme JSON
+    return jsonify(product_data)
 
 @app.route('/guess', methods=['POST'])
 def guess():
