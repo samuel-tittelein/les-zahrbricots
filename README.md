@@ -5,6 +5,17 @@
 - Fierquin Mattéo
 - Lechêne Romain (SCRUM Master)
 
+# Info sur le programme
+Programme principal : app.py
+
+features bonus :
+Ajout d'item
+Mode claire/sombre
+Music d'arrière plan sur l'écran d'acceuil
+style
+Tableau des scores
+Thèmes des items
+
 # Workflow adopté
 
 Feature Branch Workflow
