@@ -1,3 +1,6 @@
+from argparse import ArgumentError
+
+import requests
 from unicodedata import category
 
 from amazonBDD import *
@@ -12,5 +15,28 @@ def fill_product(file_path):
 
     for product in values:
         id_product = product[0]
+        if check_id(id_product):
+            print("produit non valide : ",id_product)
+            continue
         category = product[1]
         createProduct(id_product, category)
+
+def check_id(id_product):
+    url = "http://ws.chez-wam.info/" + id_product
+    try :
+        response = requests.get(url).json();
+        name = response['title'].split(',')[0]
+        price = response['price']
+        img = response['images'][0]
+    except :
+        return False
+    if name is None or price is None or img is None:
+        return False
+    return True
+
+def add_product(id_product, category):
+    if check_id(id_product):
+        createProduct(id_product, category)
+        return True
+    return False
+
