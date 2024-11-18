@@ -16,6 +16,8 @@ style
 Tableau des scores
 Thèmes des items
 
+[vidéo démo](https://gitlab.univ-artois.fr/msi-rl/msi-les-zahbricots/-/blob/main/2024-11-18_19-18-24.mkv)
+
 # Workflow adopté
 
 Feature Branch Workflow
