@@ -44,13 +44,38 @@
         <h1 class="title" style="text-align: center">Juste Prix Amazon</h1>
         <p class="subtitle" style="text-align: center">Devinez le prix d'un produit Amazon</p>
 
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const category = "{{ category }}";
+
+      fetch('/api/set_item', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ category: category })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          console.error('Erreur API:', data.error);
+          return;
+        }
+        document.getElementById('name_product').textContent = data.name;
+        document.getElementById('price').textContent = `Prix: ${data.price}`;
+        document.getElementById('image_product').src = data.image;
+      })
+      .catch(error => console.error('Erreur:', error));
+    });
+  </script>
+
         <form class="has-text-centered" method="post" action="/guess">
           <div class="columns is-centered">
             <div class="column is-narrow">
-              <h1 class="title" style="width: 80vh; font-size: 24px">
+              <h1 id="name_product" class="title" style="width: 80vh; font-size: 24px">
                 {{ name if name else "No name" }}
               </h1>
-              <img src="{{ image }}" alt="Product image" style="height: 38vh" />
+              <img id="image_product" src="{{ image }}" alt="Product image" style="height: 38vh" />
               <br />
               <div style="margin-top: 20px">
                 <input
