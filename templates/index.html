@@ -46,7 +46,7 @@
 
       <audio autoplay loop id="itemSound">
         <source
-          src="{{ url_for('static', filename='Sound/item.mp3') }}"
+          src=""
           type="audio/mpeg"
         />
       </audio>
@@ -101,10 +101,11 @@
       const img = "{{ image }}";
 
       document.getElementById('name_product').textContent = name;
-      document.getElementById('price').textContent = `Prix: ${price}`;
+      document.getElementById('price').textContent = price;
       document.getElementById('image_product').src = img;
     } else {
       console.log('Fetching data...');
+      document.getElementById('itemSound').src = "{{ url_for('static', filename='Sound/item.mp3') }}";
       fetch('/api/set_item', {
         method: 'POST',
         headers: {

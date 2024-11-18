@@ -15,9 +15,6 @@ def fill_product(file_path):
 
     for product in values:
         id_product = product[0]
-        if check_id(id_product):
-            print("produit non valide : ",id_product)
-            continue
         category = product[1]
         createProduct(id_product, category)
 
