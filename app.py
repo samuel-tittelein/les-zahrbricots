@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import api
 from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser, get_user_id
 from fill_db import fill_product
@@ -28,13 +28,8 @@ def game():
     session['nb_tries'] = 0
     
     createUser(username)
-    
-    product_data = set_item(category)
-
-    session['product'] = product_data  # Store product details in session
-    print("Product data:", product_data)
-
-    return render_template('index.html', name=product_data['name'], price=product_data['price'], image=product_data['image'])
+    print()
+    return render_template('index.html')
 
 def set_item(category):
     while True:
@@ -50,6 +45,18 @@ def set_item(category):
             return {'id': id_product, 'name': name, 'price': price, 'image': image}
         except Exception:
             continue  # Retry on failure
+
+
+@app.route('/api/set_item', methods=['POST'])
+def api_set_item():
+    category = session['category']
+    if not category:
+        return jsonify({'error': 'Category is required'}), 400
+
+    product_data = set_item(category)
+    session['product'] = product_data
+
+    return jsonify(product_data)
 
 @app.route('/guess', methods=['POST'])
 def guess():
