@@ -82,7 +82,7 @@ def guess():
 
 @app.route('/podium', methods=['GET'])
 def podium():
-    nb_tries = request.args.get('nb_tries')
+    nb_tries = session.get('nb_tries', 0)
     product_data = session.get('product')
     username = session.get('username')
 
