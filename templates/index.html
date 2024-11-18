@@ -44,13 +44,20 @@
         <h1 class="title" style="text-align: center">Juste Prix Amazon</h1>
         <p class="subtitle" style="text-align: center">Devinez le prix d'un produit Amazon</p>
 
+      <audio autoplay loop id="itemSound">
+        <source
+          src=""
+          type="audio/mpeg"
+        />
+      </audio>
+
         <form class="has-text-centered" method="post" action="/guess">
           <div class="columns is-centered">
             <div class="column is-narrow">
-              <h1 class="title" style="width: 80vh; font-size: 24px">
-                {{ name if name else "No name" }}
+              <h1 id="name_product" class="title" style="width: 80vh; font-size: 24px">
+                {{ name if name else "?" }}
               </h1>
-              <img src="{{ image }}" alt="Product image" style="height: 38vh" />
+              <img id="image_product" src="../static/images/randomItem.gif" alt="Product image" style="height: 38vh"/>
               <br />
               <div style="margin-top: 20px">
                 <input
@@ -82,6 +89,51 @@
         </form>
       </div>
     </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const category = "{{ category }}";
+    const response = "{{ response }}";
+
+    if (response !== "") {
+      const name = "{{ name }}";
+      const price = "{{ price }}";
+      const img = "{{ image }}";
+
+      document.getElementById('name_product').textContent = name;
+      document.getElementById('price').textContent = price;
+      document.getElementById('image_product').src = img;
+    } else {
+      console.log('Fetching data...');
+      document.getElementById('itemSound').src = "{{ url_for('static', filename='Sound/item.mp3') }}";
+      fetch('/api/set_item', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ category: category })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            console.error('Erreur API:', data.error);
+            return;
+          }
+
+          const name = data.name;
+          const price = data.price;
+          const img = data.image;
+
+          document.getElementById('name_product').textContent = name;
+          document.getElementById('price').textContent = `Prix: ${price}`;
+          document.getElementById('image_product').src = img;
+          document.getElementById('itemSound').src = "{{ url_for('static', filename='Sound/itemFound.mp3') }}";
+          document.getElementById('itemSound').loop = false;
+        })
+        .catch(error => console.error('Erreur:', error));
+    }
+  });
+</script>
 
     <script
       src="{{ url_for('static', filename='js/theme-switcher.js') }}"
