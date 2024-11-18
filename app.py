@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import api
 from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser, get_user_id
-from fill_db import fill_product
+from fill_db import fill_product, add_product
 import secrets
 
 app = Flask(__name__)
@@ -35,6 +35,17 @@ def game():
     print("Product data:", product_data)
 
     return render_template('index.html', name=product_data['name'], price=product_data['price'], image=product_data['image'])
+
+@app.route('/nouveau', methods=['GET', 'POST'])
+def nouveau():
+    if request.method == 'GET':
+        return render_template('nouvel_item.html')
+    if request.method == 'POST':
+        name = request.form.get('itemId', '').strip()
+        category = request.form.get('category', '').strip()
+        add_product(name, category)
+        return redirect('/')
+
 
 def set_item(category):
     while True:
