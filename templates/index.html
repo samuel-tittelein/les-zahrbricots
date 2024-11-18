@@ -11,6 +11,23 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/themes.css') }}"
     />
+    <style>
+      form {
+        background: #151515;
+        border: 2px solid black;
+        width: 50vw;
+        margin: auto;
+        border-radius: 10px;
+        margin-top: 10px;
+        padding: 15px;
+        box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      body.light-mode form{
+        background: #ccc;
+        border: 2px solid gray;
+      }
+    </style>
 
     <title>Juste Prix Amazon</title>
   </head>
@@ -24,16 +41,16 @@
     </nav>
     <section class="section">
       <div class="container">
-        <h1 class="title">Juste Prix Amazon</h1>
-        <p class="subtitle">Devinez le prix d'un produit Amazon</p>
+        <h1 class="title" style="text-align: center">Juste Prix Amazon</h1>
+        <p class="subtitle" style="text-align: center">Devinez le prix d'un produit Amazon</p>
 
-        <form class="has-text-centered" style="background: #151515; border: 2px solid black; width: 50vw; margin: auto; border-radius: 10px; margin-top: 8px; padding: 15px; box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.2)" method="post" action="/guess">
+        <form class="has-text-centered" method="post" action="/guess">
           <div class="columns is-centered">
             <div class="column is-narrow">
-              <h1 class="title" style="width: 75vh">
+              <h1 class="title" style="width: 80vh; font-size: 24px">
                 {{ name if name else "No name" }}
               </h1>
-              <img src="{{ image }}" alt="Product image" style="height: 40vh" />
+              <img src="{{ image }}" alt="Product image" style="height: 38vh" />
               <br />
               <div style="margin-top: 20px">
                 <input
