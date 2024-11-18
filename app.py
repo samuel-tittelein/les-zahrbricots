@@ -104,7 +104,11 @@ def podium():
     product_data = session.get('product')
     username = session.get('username')
 
-    category = get_category(product_data['id'])
+    if not product_data:
+        category = "informatique"
+    else:
+        category = get_category(product_data['id'])
+
     podium = getPodium(category)
     print('podium:', podium)
     
