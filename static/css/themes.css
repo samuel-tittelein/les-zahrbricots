@@ -1,7 +1,19 @@
 body {
-  background-color: #121212;
   color: #ffffff;
   height: 100vh;
+}
+
+nav{
+  background-color: #111;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .title,
@@ -12,7 +24,7 @@ button {
 }
 
 .input {
-  background-color: #1e1e1e;
+  background-color: #333;
   border-color: #333333;
   color: #ffffff;
 }
@@ -24,10 +36,18 @@ body.light-mode {
   background-color: #ffffff;
   color: #000000;
 }
+
+body.light-mode nav {
+  background-color: #444;
+}
+
 body.light-mode .title,
 body.light-mode .subtitle,
 body.light-mode input {
   color: #000000;
+}
+body.light-mode input::placeholder {
+    color: gray;
 }
 body.light-mode .button {
   border: 1px solid #ccc;

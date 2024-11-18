@@ -14,7 +14,7 @@
     />
     <style>
       body {
-        background-color: #121212;
+        background-color: #252525;
         color: #ffffff;
         height: 100vh;
       }
@@ -24,6 +24,9 @@
       }
       h1 {
         margin-bottom: 20px;
+      }
+      input[type="submit"] {
+        cursor: pointer;
       }
       input[type="text"] {
         width: 100%;
@@ -44,9 +47,13 @@
     </style>
   </head>
   <body>
-    <div class="has-text-right">
-      <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
-    </div>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/podium">Podium</a>
+      <div class="has-text-right">
+        <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
+      </div>
+    </nav>
     <form action="/game" method="post">
       <section class="section">
         <div class="container">
