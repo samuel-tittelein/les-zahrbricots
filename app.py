@@ -19,16 +19,15 @@ def game():
     set_item()  # Set initial product data before rendering
     return render_template('index.html', name=product_name, price=product_price)
 
-@app.route('/nouveau', methods=['GET'])
+@app.route('/nouveau', methods=['GET', 'POST'])
 def nouveau():
-    return render_template('nouvel_item.html')
-
-@app.route('/nouveau', methods=['POST'])
-def nouveau2():
-    name = request.form.get('itemId', 'sgeg')
-    #category = request.form.get('categorie')
-    str = "Item ajouté : ", name
-    return str
+    if request.method == 'GET':
+        return render_template('nouvel_item.html')
+    if request.method == 'POST':
+        name = request.form.get('itemId', '').strip()
+        category = request.form.get('category', '').strip()
+        add_product(name, category)
+        return redirect('/')
 
 product_price = 15  # default price, to be updated from the API
 product_name = "test"  # default name, to be updated from the API
