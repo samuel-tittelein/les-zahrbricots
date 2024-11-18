@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import api
 from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser, get_user_id
-from fill_db import fill_product
+from fill_db import fill_product, add_product
 import secrets
 
 app = Flask(__name__)
