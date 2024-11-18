@@ -32,22 +32,24 @@ def game():
     product_data = set_item(category)
 
     session['product'] = product_data  # Store product details in session
+    print("Product data:", product_data)
 
     return render_template('index.html', name=product_data['name'], price=product_data['price'], image=product_data['image'])
 
 def set_item(category):
-    id_product = api.get_random_id_product(category)
-    try:
-        name, price, image = api.get_infos(id_product)
-        if price.strip() == "":
-            set_item(category) 
+    while True:
+        id_product = api.get_random_id_product(category)
+        try:
+            name, price, image = api.get_infos(id_product)
+            if price.strip() == "":
+                continue 
 
-        price = price.replace("€", "").replace(",", ".")
-        price = float(price)  
+            price = price.replace("€", "").replace(",", ".")
+            price = float(price)  # Convert price to a numeric type
 
-        return {'id': id_product, 'name': name, 'price': price, 'image': image}
-    except Exception:
-        set_item(category) 
+            return {'id': id_product, 'name': name, 'price': price, 'image': image}
+        except Exception:
+            continue  # Retry on failure
 
 @app.route('/guess', methods=['POST'])
 def guess():
