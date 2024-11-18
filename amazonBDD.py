@@ -136,7 +136,7 @@ def getPodium(category):
     try:
         print('pod : ', "(\'" + category + "\',)")
         print('cat : ', getCategories())
-        cur.execute("SELECT USER.name, nb_tries, price FROM THE_PRICE_IS_RIGHT INNER JOIN USER ON THE_PRICE_IS_RIGHT.id_user = USER.id INNER JOIN PRODUCT ON PRODUCT.id = THE_PRICE_IS_RIGHT.id_product WHERE PRODUCT.category =? LIMIT 5", (category,))
+        cur.execute("SELECT USER.name, nb_tries, price FROM THE_PRICE_IS_RIGHT INNER JOIN USER ON THE_PRICE_IS_RIGHT.id_user = USER.id INNER JOIN PRODUCT ON PRODUCT.id = THE_PRICE_IS_RIGHT.id_product WHERE PRODUCT.category =? ORDER BY nb_tries LIMIT 5", (category,))
         podium = cur.fetchall()
         print('pod : ', podium)
         return podium
