@@ -14,7 +14,6 @@
     />
     <style>
       body {
-        background-color: #121212;
         color: #ffffff;
         height: 100vh;
       }
@@ -24,6 +23,9 @@
       }
       h1 {
         margin-bottom: 20px;
+      }
+      input[type="submit"] {
+        cursor: pointer;
       }
       input[type="text"] {
         width: 100%;
@@ -44,9 +46,13 @@
     </style>
   </head>
   <body>
-    <div class="has-text-right">
-      <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
-    </div>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/podium">Podium</a>
+      <div class="has-text-right">
+        <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
+      </div>
+    </nav>
     <form action="/game" method="post">
       <section class="section">
         <div class="container">
@@ -82,6 +88,33 @@
         </div>
       </section>
     </form>
+    <audio autoplay loop>
+      <source
+        src="{{ url_for('static', filename='Sound/background_music.mp3') }}"
+        type="audio/mpeg"
+      />
+    </audio>
+    <button
+      id="mute-toggle"
+      class="button"
+      style="position: fixed; bottom: 10px; right: 10px"
+    >
+      🔇 Mute
+    </button>
+    <script>
+      const audio = document.querySelector("audio");
+      const muteButton = document.getElementById("mute-toggle");
+
+      muteButton.addEventListener("click", () => {
+        if (audio.muted) {
+          audio.muted = false;
+          muteButton.textContent = "🔇 Mute";
+        } else {
+          audio.muted = true;
+          muteButton.textContent = "🔊 Unmute";
+        }
+      });
+    </script>
 
     <script
       src="{{ url_for('static', filename='js/theme-switcher.js') }}"

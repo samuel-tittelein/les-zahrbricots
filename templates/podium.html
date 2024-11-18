@@ -11,19 +11,27 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/themes.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/podium.css') }}"
+    />
     <title>Juste Prix Amazon</title>
   </head>
   <body>
-    <div class="has-text-right">
-      <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
-    </div>
+      <nav>
+      <a href="/">Accueil</a>
+      <a href="/podium">Podium</a>
+      <div class="has-text-right">
+        <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
+      </div>
+    </nav>
     <section class="section">
       <div class="container">
-        <h1 class="title">Juste Prix Amazon</h1>
-        <p class="subtitle">
+        <h1 class="title" style="text-align: center">Juste Prix Amazon</h1>
+        <p class="subtitle" style="text-align: center">
           Podium pour la categorie : {{category if category else "Vetement"}}
         </p>
-        <p class="subtitle">
+        <p class="subtitle" style="text-align: center">
           Vous avez trouvé avec : {{nb_tries if nb_tries else 0}} essaie(s)
         </p>
 
