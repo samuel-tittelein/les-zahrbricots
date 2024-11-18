@@ -5,7 +5,7 @@ from fill_db import fill_product, add_product
 import secrets
 
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(24)  # This key is stored inside the .env file as FLASK_SECRET_KEY
+app.secret_key = secrets.token_hex(24)  # Clé généré aléatoirement
 
 @app.route('/')
 def home():

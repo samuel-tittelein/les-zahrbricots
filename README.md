@@ -8,13 +8,15 @@
 # Info sur le programme
 Programme principal : app.py
 
+à chaque essaie le vrai prix sera afficher dans la console
+
 features bonus :
-Ajout d'item
-Mode claire/sombre
-Music d'arrière plan sur l'écran d'acceuil
-style
-Tableau des scores
-Thèmes des items
+- Ajout d'item
+- Mode claire/sombre
+- Music d'arrière plan sur l'écran d'acceuil
+- style
+- Tableau des scores
+- Thèmes des items
 
 [vidéo démo](https://gitlab.univ-artois.fr/msi-rl/msi-les-zahbricots/-/blob/main/2024-11-18_19-18-24.mkv)
 
