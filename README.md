@@ -42,6 +42,14 @@ Chaque commit sera aussi atomique que possible, et devra comporter la référenc
 - Remplissage de la BDD
 - Lien entre l'appli et la BDD
 
+# Sprint backlog 4
+
+- Vérification du code avec PyLint
+- Ajout de bruitages
+- Ajout d'une page pour ajouter des items
+- Verification des items avant ajout à la BD
+- Amélioration du CSS
+
 # Format de l'agenda
 
 Une milestone git par sprint, correspondant à une séance (première milestone sur deux séances car la première n'est pas complète)
