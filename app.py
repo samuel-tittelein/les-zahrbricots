@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import api
 from amazonBDD import getCategories, getPodium, createThePriceIsRight, get_category, createUser, get_user_id
-from fill_db import fill_product, add_product
+from fill_db import fill_product
 import secrets
 
 app = Flask(__name__)
@@ -16,37 +16,19 @@ def home():
 
 @app.route('/game', methods=['POST'])
 def game():
-    set_item()  # Set initial product data before rendering
-    return render_template('index.html', name=product_name, price=product_price)
-
-@app.route('/nouveau', methods=['GET', 'POST'])
-def nouveau():
-    if request.method == 'GET':
-        return render_template('nouvel_item.html')
-    if request.method == 'POST':
-        name = request.form.get('itemId', '').strip()
-        category = request.form.get('category', '').strip()
-        add_product(name, category)
-        return redirect('/')
-
-product_price = 15  # default price, to be updated from the API
-product_name = "test"  # default name, to be updated from the API
-product_image = "test"  # default image, to be updated from the API
-
-def set_item():
-    global product_name, product_price, product_image
+    username = request.form.get('username')
     category = request.form.get('categorie')
     if not category:
         category = session.get('category')
-
+    
     # Store user and game data in the session
     # The session is stored inside the browser's cookies
     session['username'] = username
     session['category'] = category
     session['nb_tries'] = 0
-
+    
     createUser(username)
-
+    
     product_data = set_item(category)
 
     session['product'] = product_data  # Store product details in session
@@ -60,7 +42,7 @@ def set_item(category):
         try:
             name, price, image = api.get_infos(id_product)
             if price.strip() == "":
-                continue
+                continue 
 
             price = price.replace("€", "").replace(",", ".")
             price = float(price)  # Convert price to a numeric type
@@ -77,7 +59,7 @@ def guess():
     nb_tries = session.get('nb_tries', 0)
 
     if not guess_price:
-        return render_template('index.html', response='Merci d\'entrer un prix', name=product_data['name'], price=product_data['price'], image=product_data['image'])
+        return render_template('index.html', response='Merci d\'entrer un prix', name=product_data['name'], price=product_data['price'], image=product_data['image'])    
     try:
         guess_price = float(guess_price)
         nb_tries += 1
@@ -107,7 +89,7 @@ def podium():
     category = get_category(product_data['id'])
     podium = getPodium(category)
     print('podium:', podium)
-
+    
     return render_template('podium.html', podium=podium, category=category, nb_tries=nb_tries, username=username)
 
 
