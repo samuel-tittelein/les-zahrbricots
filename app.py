@@ -77,11 +77,12 @@ def guess():
     nb_tries = session.get('nb_tries', 0)
 
     if not guess_price:
-        return render_template('index.html', response='Merci d\'entrer un prix', name=product_data['name'], price=product_data['price'], image=product_data['image'])    
+        return render_template('index.html', response='Merci d\'entrer un prix', name=product_data['name'], image=product_data['image'])    
     try:
         guess_price = float(guess_price)
         nb_tries += 1
         session['nb_tries'] = nb_tries
+        print("Le prix est de", product_data['price'])
 
         if guess_price < product_data['price']:
             response = f"Vous avez entrez {guess_price}€, ce qui est trop bas"
@@ -95,7 +96,7 @@ def guess():
     except ValueError:
         response = "Merci d'entrer un prix valide"
 
-    return render_template('index.html', response=response, name=product_data['name'], price=product_data['price'], image=product_data['image'])
+    return render_template('index.html', response=response, name=product_data['name'], image=product_data['image'])
 
 
 @app.route('/podium', methods=['GET'])
