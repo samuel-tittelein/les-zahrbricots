@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juste Prix Amazon</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes.css') }}"
+    />
+    <style>
+      body {
+        color: #ffffff;
+        height: 100vh;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      input[type="submit"] {
+        cursor: pointer;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      input[type="submit"] {
+        width: 100%;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/podium">Podium</a>
+      <div class="has-text-right">
+        <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
+      </div>
+    </nav>
+    <form action="/game" method="post">
+      <section class="section">
+        <div class="container">
+          <h1 class="title">Nom d'utilisateur :</h1>
+          <input
+            class="input"
+            type="text"
+            name="username"
+            placeholder="Entrez votre nom d'utilisateur"
+            required
+          />
+          <div class="columns is-centered">
+            <div class="column is-narrow">
+              <ul>
+                {% for categorie in categories %}
+                <li>
+                  <label class="title">
+                    <input
+                      type="radio"
+                      class="radio"
+                      name="categorie"
+                      value="{{ categorie }}"
+                      required
+                    />
+                    {{ categorie }}
+                  </label>
+                </li>
+                {% endfor %}
+              </ul>
+              <input type="submit" value="Commencer" class="input" />
+            </div>
+          </div>
+          <a href="/nouveau" class="button">Ajouter un nouvel objet</a>
+        </div>
+      </section>
+    </form>
+    <audio autoplay>
+      <source
+        src="{{ url_for('static', filename='Sound/background_music.mp3') }}"
+        type="audio/mpeg"
+      />
+    </audio>
+    <button
+      id="mute-toggle"
+      class="button"
+      style="position: fixed; bottom: 10px; right: 10px"
+    >
+      🔇 Mute
+    </button>
+    <script>
+      const audio = document.querySelector("audio");
+      const muteButton = document.getElementById("mute-toggle");
+
+      muteButton.addEventListener("click", () => {
+        if (audio.muted) {
+          audio.muted = false;
+          muteButton.textContent = "🔇 Mute";
+        } else {
+          audio.muted = true;
+          muteButton.textContent = "🔊 Unmute";
+        }
+      });
+    </script>
+
+    <script
+      src="{{ url_for('static', filename='js/theme-switcher.js') }}"
+      defer
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juste Prix Amazon</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes.css') }}"
+      />
+    <style>
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      input[type="submit"] {
+        width: 100%;
+        margin-top: 20px;
+      }
+      body.light-mode select{
+        background-color: white;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="has-text-right">
+      <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
+    </div>
+    <form action="/nouveau" method="post">
+      <section class="section">
+        <div class="container">
+            <img src="{{ url_for('static', filename='images/image.png') }}" alt="Tutoriel">
+          <h1 class="title">Ajout d'un nouvel objet</h1>
+          <div class="columns is-centered">
+            <div class="column is-narrow">
+              <input type="text" placeholder="ID du produit (comme dans l'image)" name="itemId" class="input"/>
+              <select class="select" style="background-color: black; color:white" name="categorie" id="categorie-select">
+                <option value="Informatique">Informatique</option>
+                <option value="Abricot">Abricot</option>
+                <option value="Vetements">Vetements</option>
+                <option value="DVD">DVD</option>
+                <option value="Sport">Sport</option>
+                <option value="Cuisine">Cuisine</option>
+              </select>
+              <input type="submit" value="Confirmer" class="input" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+  <script
+    src="{{ url_for('static', filename='js/theme-switcher.js') }}"
+    defer
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/podium.css') }}"
+    />
+    <title>Juste Prix Amazon</title>
+  </head>
+  <body>
+      <nav>
+      <a href="/">Accueil</a>
+      <a href="/podium">Podium</a>
+      <div class="has-text-right">
+        <button id="mode-toggle" class="button is-small">☀️ Mode Clair</button>
+      </div>
+    </nav>
+    <section class="section">
+      <div class="container">
+        <h1 class="title" style="text-align: center">Juste Prix Amazon</h1>
+        <p class="subtitle" style="text-align: center">
+          Podium pour la categorie : {{category if category else "Vetement"}}
+        </p>
+        <p class="subtitle" style="text-align: center">
+          Vous avez trouvé avec : {{nb_tries if nb_tries else 0}} essaie(s)
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Joueur</th>
+              <th>Nombre d'essaies</th>
+              <th>Prix</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for player in podium %}
+            <tr>
+              <td>{{ player[0] }}</td>
+              <td>{{ player[1] }}</td>
+              <td>{{ player[2] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <form method="post" action="/game">
+          <label for="username">
+            Continuer en tant que : <br>
+            <input
+              type="text"
+              class="input"
+              placeholder="Nom d'utilisateur"
+              value="{{ username }}"
+              name="username"
+              style="width:20%"
+            />
+          </label><br>
+          <input type="submit" value="Prochain produit" class="input" style="width: 20%; margin-top: 20px" />
+        </form>
+      </div>
+    </section>
+
+    <script
+      src="{{ url_for('static', filename='js/theme-switcher.js') }}"
+      defer
+    ></script>
+  </body>
+</html>
